@@ -8,8 +8,8 @@ export function FaqsContainer() {
       <Accordion.Title>Frequently Asked Questions</Accordion.Title>
       {faqsData.map((item) => (
         <Accordion.Item key={item.id}>
-          <Accordion.Header>{item.header}</Accordion.Header>
-          <Accordion.Body>{item.body}</Accordion.Body>
+          <Accordion.Header id={item.id}>{item.header}</Accordion.Header>
+          <Accordion.Body id={item.id}>{item.body}</Accordion.Body>
         </Accordion.Item>
       ))}
       <Accordion.Item />

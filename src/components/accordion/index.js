@@ -1,4 +1,4 @@
-import React, {createContext, useState, useContext} from 'react';
+import React, { createContext, useState, useContext } from "react";
 import {
   Container,
   Title,
@@ -6,42 +6,47 @@ import {
   Inner,
   Header,
   Body,
-} from './styles/accordion';
+} from "./styles/accordion";
 
 const ToggleContext = createContext();
 
-export default function Accordion({children, ...restProp}) {
+export default function Accordion({ children, ...restProp }) {
+  const [toggleShow, setToggleShow] = useState(0);
+
   return (
-    <Container {...restProp}>
-      <Inner>{children}</Inner>
-    </Container>
+    <ToggleContext.Provider value={{ toggleShow, setToggleShow }}>
+      <Container {...restProp}>
+        <Inner>{children}</Inner>
+      </Container>
+    </ToggleContext.Provider>
   );
 }
 
-Accordion.Title = function AccordionTitle({children, ...restProp}) {
+Accordion.Title = function AccordionTitle({ children, ...restProp }) {
   return <Title {...restProp}>{children}</Title>;
 };
 
-Accordion.Item = function AccordionItem({children, ...restProp}) {
-  const [toggleShow, setToggleShow] = useState(false);
-
-  return (
-    <ToggleContext.Provider value={{toggleShow, setToggleShow}}>
-      <Item {...restProp}>{children}</Item>
-    </ToggleContext.Provider>
-  );
+Accordion.Item = function AccordionItem({ children, ...restProp }) {
+  return <Item {...restProp}>{children}</Item>;
 };
 
-Accordion.Header = function AccordionHeader({children, ...restProp}) {
-  const {toggleShow, setToggleShow} = useContext(ToggleContext);
+Accordion.Header = function AccordionHeader({ id, children, ...restProp }) {
+  const { toggleShow, setToggleShow } = useContext(ToggleContext);
 
   return (
+    // eslint-disable-next-line no-unused-vars
     <Header
-      onClick={() => setToggleShow((toggleShow) => !toggleShow)}
+      onClick={
+        toggleShow === id
+          ? // eslint-disable-next-line no-unused-vars
+            () => setToggleShow((toggleShow) => 0)
+          : // eslint-disable-next-line no-unused-vars
+            () => setToggleShow((toggleShow) => id)
+      }
       {...restProp}
     >
       {children}
-      {toggleShow ? (
+      {toggleShow === id ? (
         <img src="/images/icons/close-slim.png" alt="Close" />
       ) : (
         <img src="/images/icons/add.png" alt="Open" />
@@ -50,8 +55,13 @@ Accordion.Header = function AccordionHeader({children, ...restProp}) {
   );
 };
 
-Accordion.Body = function AccordionBody({children, ...restProp}) {
-  const {toggleShow} = useContext(ToggleContext);
+Accordion.Body = function AccordionBody({ id, children, ...restProps }) {
+  const { toggleShow } = useContext(ToggleContext);
 
-  return toggleShow ? <Body {...restProp}>{children}</Body> : null;
+  //return toggleShow === id ? <Body {...restProps}>{children}</Body> : null;
+  return (
+    <Body className={toggleShow === id ? "open" : "closed"} {...restProps}>
+      <span>{children}</span>
+    </Body>
+  );
 };

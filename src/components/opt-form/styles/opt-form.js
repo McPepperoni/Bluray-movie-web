@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 export const Container = styled.div`
   display: flex;
@@ -13,6 +13,7 @@ export const Container = styled.div`
 `;
 
 export const Input = styled.input`
+  border-radius: 3px 0 0 3px;
   max-width: 400px;
   width: 100%;
   border: 0;
@@ -29,6 +30,7 @@ export const Break = styled.div`
 export const Button = styled.button`
   display: flex;
   align-items: center;
+  border-radius: 0 3px 3px 0;
   height: 70px;
   background: #e50914;
   color: white;
