@@ -1,6 +1,6 @@
-import React from 'react';
-import faqsData from '../fixtures/faq';
-import {Accordion, OptForm} from '../components';
+import React from "react";
+import faqsData from "../fixtures/faq";
+import { Accordion, OptForm } from "../components";
 
 export function FaqsContainer() {
   return (

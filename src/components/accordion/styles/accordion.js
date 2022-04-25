@@ -62,7 +62,7 @@ export const Inner = styled.div`
   display: flex;
   padding: 70px 45px;
   flex-direction: column;
-  max-width: 670px;
+  max-width: 700px;
   margin: auto;
 `;
 
