@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 export const Item = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const Item = styled.div`
 export const Inner = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: ${({direction}) => direction};
+  flex-direction: ${({ direction }) => direction};
   justify-content: center;
   justify-content: space-between;
   max-width: 1100px;
@@ -31,20 +31,24 @@ export const Container = styled.div`
 `;
 
 export const Pane = styled.div`
-  width: 50%;
-
-  @media (max-width: 100%) {
-    width: 100%;
-    padding: 0 45px;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 `;
 
 export const Title = styled.h1`
   font-size: 50px;
   line-height: 1.1;
-  margin-bottom: 8px @media (max-width: 600px) {
-    font-size: 35px;
+  margin-bottom: 8px;
+
+  @media (max-width: 1000px) {
+    font-size: 45px;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 25px;
   }
 `;
 
@@ -54,8 +58,12 @@ export const SubTitle = styled.h2`
   line-height: normal;
   margin-bottom: 8px;
 
+  @media (max-width: 1000px) {
+    text-align: center;
+  }
+
   @media (max-width: 600px) {
-    fonr-size: 18px;
+    font-size: 18px;
   }
 `;
 

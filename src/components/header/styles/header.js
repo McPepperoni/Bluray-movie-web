@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 export const Background = styled.div`
@@ -24,23 +24,33 @@ export const Container = styled.div`
   @media (max-width: 1000px) {
     margin: 0 30px;
   }
+
+  @media (max-width: 530px) {
+    margin: 0 calc(16px + 0.1vw);
+  }
 `;
 
 export const Logo = styled.img`
-  height: 32px;
-  width: 108px;
+  width: 167px;
   margin-right: 40px;
 
-  @media (min-width: 1449px) {
-    height: 45px;
-    width: 167px;
+  @media (max-width: 1449px) {
+    width: 134px;
+  }
+
+  @media (max-width: 1000px) {
+    width: 108px;
+  }
+
+  @media (max-width: 530px) {
+    height: 24px;
   }
 `;
 
 export const ButtonLink = styled(ReactRouterLink)`
   display: block;
   background-color: #e50914;
-  width: 84px;
+  width: fit-content;
   height: fit-content;
   color: white;
   border: 0;
@@ -50,8 +60,13 @@ export const ButtonLink = styled(ReactRouterLink)`
   cursor: pointer;
   text-decoration: none;
   box-sizing: border-box;
+  white-space: nowrap;
 
   &:hover {
     background-color: #f40612;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 4px 8px;
   }
 `;

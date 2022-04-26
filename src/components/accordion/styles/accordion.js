@@ -71,21 +71,30 @@ export const Body = styled.div`
 
 export const Inner = styled.div`
   display: flex;
-  padding: 70px 45px;
+  padding: 70px 45px 0 45px;
   flex-direction: column;
-  max-width: 700px;
+  max-width: 950px;
   margin: auto;
+
+  @media (max-width: 530px) {
+    padding: 70px 0 0 0;
+  }
 `;
 
 export const Title = styled.h1`
-    font-size 50px;
-    line-height: 1.1
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: white;
-    text-align: center;
+  font-size 50px;
+  line-height: 1.1
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: white;
+  text-align: center;
 
-    @media (max-width: 600px) {
-        font-size: 35px;
-}
+  @media (max-width: 1000px) {
+    font-size: 45px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 25px;
+    padding: 0 16px;
+  }
 `;

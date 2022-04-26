@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 export const Container = styled.div`
   display: flex;
@@ -6,6 +6,7 @@ export const Container = styled.div`
   margin: auto;
   max-width: 1000px;
   flex-direction: column;
+
   @media (max-width: 1000px) {
     padding: 70px 30px;
   }
