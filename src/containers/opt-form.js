@@ -9,7 +9,7 @@ export function OptFormContainer() {
       </OptForm.Text>
       <OptForm.Break />
       <OptForm.InputContainer>
-        <OptForm.Input />
+        <OptForm.Input placeholder="Email address" />
       </OptForm.InputContainer>
       <OptForm.Button>Get started</OptForm.Button>
     </OptForm>

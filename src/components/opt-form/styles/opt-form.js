@@ -72,7 +72,7 @@ export const Input = styled.input`
     }
   }
 
-  &:focus ~ s &:focus {
+  &:focus {
     outline: none;
     border: 1px solid #0071eb;
   }

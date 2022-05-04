@@ -5,6 +5,7 @@ import App from "./app";
 import { GlobalStyles } from "./global-styled";
 // eslint-disable-next-line no-unused-vars
 import { firebase } from "./lib/firebase.pod";
+import { FirebaseContext } from "./context/firebase";
 
 render(
   <>
