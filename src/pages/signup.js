@@ -41,7 +41,7 @@ export default function Signup() {
 
   return (
     <>
-      <HeaderContainer>
+      <HeaderContainer needSignIn={false}>
         <Form>
           <Form.Title>Sign up</Form.Title>
           {error && <Form.Error>{error}</Form.Error>}
