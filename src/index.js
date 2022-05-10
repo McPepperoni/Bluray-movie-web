@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import "normalize.css";
 import App from "./app";
 import { GlobalStyles } from "./global-styled";
@@ -7,12 +7,13 @@ import { GlobalStyles } from "./global-styled";
 import { firebase } from "./lib/firebase.pod";
 import { FirebaseContext } from "./context/firebase";
 
-render(
+const root = createRoot(document.getElementById("root"));
+
+root.render(
   <>
     <FirebaseContext.Provider value={{ firebase }}>
       <GlobalStyles />
       <App />
     </FirebaseContext.Provider>
-  </>,
-  document.getElementById("root")
+  </>
 );
