@@ -2,16 +2,36 @@ import styled from "styled-components/macro";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 export const Background = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  background: url(${({ src }) => {
-      return src ? `../images/misc/${src}.jpg` : "../images/misc/home-bg.jpg";
-    }})
-    top left / cover no-repeat;
+  background: linear-gradient(rgba(255, 255, 255, 0) 70%, rgba(0, 0, 0, 1)),
+    url(${({ src }) => {
+        return src ? `../images/misc/${src}.jpg` : "../images/misc/home-bg.jpg";
+      }})
+      top left / cover no-repeat;
+`;
 
-  @media (max-width: 1100px) {
-    ${({ dontShowOnSmallViewPort }) =>
-      dontShowOnSmallViewPort && `background: none;`}
+export const FixedContainer = styled.div`
+  display: flex;
+  position: fixed;
+  margin: 0;
+  height: 64px;
+  padding: 18px 56px;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 112px);
+  background: linear-gradient(rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 0));
+  a {
+    display: flex;
+  }
+
+  @media (max-width: 1000px) {
+    margin: 0 30px;
+  }
+
+  @media (max-width: 530px) {
+    margin: 0 calc(16px + 0.1vw);
   }
 `;
 
@@ -78,27 +98,24 @@ export const ButtonLink = styled(ReactRouterLink)`
 `;
 
 export const Feature = styled(Container)`
-  padding: 150px 0 550px 0;
+  padding: 350px 0 390px 0;
   flex-direction: column;
   align-items: normal;
-  width: 50%;
-
-  @media (max-width: 1100px) {
-    display: none;
-  }
+  width: 30%;
 `;
 
 export const Text = styled.p`
   color: white;
-  font-size: 22px;
+  font-size: 1vw;
   line-height: normal;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
   margin: 0;
+  text-overflow: ellipsis;
 `;
 
 export const FeatureCallOut = styled.h2`
   color: white;
-  font-size: 50px;
+  font-size: 3vw;
   line-height: normal;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
@@ -194,6 +211,7 @@ export const Profile = styled.div`
 
 export const Search = styled.div`
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
 
   svg {
@@ -208,8 +226,13 @@ export const Search = styled.div`
 
 export const SearchIcon = styled.button`
   cursor: pointer;
+  position: absolute;
   background-color: transparent;
   border: 0;
+  margin-top: 2px;
+  position: absolute;
+  right: 112px;
+  transition: all 0.5s;
 
   img {
     filter: brightness(0) invert();
@@ -218,35 +241,98 @@ export const SearchIcon = styled.button`
 `;
 
 export const SearchInput = styled.input`
-  background-color: #44444459;
+  background-color: rgba(0, 0, 0, 0.75);
   color: white;
-  border: 1px solid white;
-  transition: width 0.5s;
-  height: 30px;
+  border: 2px solid white;
+  transition: all 0.5s;
+  height: 34px;
   font-size: 14px;
-  margin-left: ${({ active }) => (active === true ? "10px" : "0")};
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  width: 0;
+  /* margin-left: ${({ active }) => (active === true ? "10px" : "0")};
   padding: ${({ active }) => (active === true ? "0 10px" : "0")};
   opacity: ${({ active }) => (active === true ? "1" : "0")};
-  width: ${({ active }) => (active === true ? "270px" : "0")};
+  width: ${({ active }) => (active === true ? "270px" : "0")}; */
 
-  @media (max-width: 10px) {
-    display: none;
+  &:focus {
+    outline: none;
+    padding-left: 30px;
+    padding-right: 10px;
+    opacity: 1;
+    width: 230px;
+
+    & + ${SearchIcon} {
+      margin-right: 240px;
+    }
   }
 `;
 
 export const PlayButton = styled.button`
+  display: flex;
+  //justify-content: center;
+  align-items: center;
   box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
   background-color: #e6e6e6;
   color: #000;
   border-width: 0;
-  padding: 10px 20px;
+  padding: 0.5vw 1.5vw;
   border-radius: 4px;
-  max-width: 130px;
+  max-width: fit-content;
   font-size: 20px;
   margin-top: 30px;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.75);
+  }
+
+  img {
+    width: 25px;
+    padding-right: 5px;
+
+    @media (max-width: 1100px) {
+      width: 2.5vw;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 2vw;
+  }
+`;
+
+export const InfoButton = styled.button`
+  display: flex;
+  //justify-content: center;
+  align-items: center;
+  box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
+  background-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+  border-width: 0;
+  padding: 0.5vw 1.5vw;
+  border-radius: 4px;
+  max-width: fit-content;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  img {
+    width: 25px;
+    padding: 0 5px;
+    filter: brightness(0) invert();
+
+    @media (max-width: 1100px) {
+      width: 2.5vw;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    font-size: 2vw;
   }
 `;

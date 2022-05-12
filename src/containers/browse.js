@@ -26,7 +26,7 @@ export function BrowseContainer(slides) {
     <>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
       <Header src="joker1" dontShowOnSmallViewPort>
-        <Header.Frame>
+        <Header.Frame isFixed={true}>
           <Header.Group>
             <Header.Logo to={ROUTES.HOME} alt="Netflix" src={logo} />
             <Header.TextLink>Series</Header.TextLink>
@@ -62,7 +62,10 @@ export function BrowseContainer(slides) {
             he projects in a futile attempt to feel like he&apos;s part of the
             world around him.
           </Header.Text>
-          <Header.PlayButton>Play</Header.PlayButton>
+          <Header.Group>
+            <Header.PlayButton>Play</Header.PlayButton>
+            <Header.InfoButton>More Info</Header.InfoButton>
+          </Header.Group>
         </Header.Feature>
       </Header>
     </>

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
+import useFocus from "../../hooks/use-focus";
 import {
   Background,
   ButtonLink,
   Container,
+  FixedContainer,
   Logo,
   Feature,
   Text,
@@ -17,6 +19,7 @@ import {
   SearchIcon,
   SearchInput,
   PlayButton,
+  InfoButton,
 } from "./styles/header";
 
 export default function Header({ bg = true, children, ...restProps }) {
@@ -42,8 +45,16 @@ Header.Feature = function HeaderFeature({ children, ...restProps }) {
   return <Feature {...restProps}>{children}</Feature>;
 };
 
-Header.Frame = function HeaderFrame({ children, ...restProps }) {
-  return <Container {...restProps}>{children}</Container>;
+Header.Frame = function HeaderFrame({
+  isFixed = false,
+  children,
+  ...restProps
+}) {
+  return !(isFixed === true) ? (
+    <Container {...restProps}>{children}</Container>
+  ) : (
+    <FixedContainer {...restProps}>{children}</FixedContainer>
+  );
 };
 
 Header.Group = function HeaderGroup({ children, ...restProps }) {
@@ -63,7 +74,21 @@ Header.ButtonLink = function HeaderButtonLink({ children, ...restProps }) {
 };
 
 Header.PlayButton = function HeaderPlayButton({ children, ...restProps }) {
-  return <PlayButton {...restProps}>{children}</PlayButton>;
+  return (
+    <PlayButton {...restProps}>
+      <img src="/images/icons/play.svg" />
+      {children}
+    </PlayButton>
+  );
+};
+
+Header.InfoButton = function HeaderInfoButton({ children, ...restProps }) {
+  return (
+    <InfoButton {...restProps}>
+      <img src="/images/icons/info.svg" />
+      {children}
+    </InfoButton>
+  );
 };
 
 Header.Picture = function HeaderPicture({ src, ...restProps }) {
@@ -83,21 +108,26 @@ Header.Search = function HeaderSearch({
   setSearchTerm,
   ...restProps
 }) {
-  const [searchActive, setSearchActive] = useState(false);
+  //const [searchActive, setSearchActive] = useState(false);
+  const [inputFocus, setInputFocus] = useFocus();
+
   return (
     <Search {...restProps}>
-      <SearchIcon
-        onClick={() => setSearchActive((searchActive) => !searchActive)}
-      >
-        <img src="/images/icons/search.png" alt="Search" />
-      </SearchIcon>
       <SearchInput
-        autoFocus={true}
         value={searchTerm}
         onChange={({ target }) => setSearchTerm(target.value)}
         placeholder="Titles, People and Genres"
-        active={searchActive}
+        //active={searchActive}
+        ref={inputFocus}
       />
+      <SearchIcon
+        onClick={() => {
+          //setSearchActive((searchActive) => !searchActive);
+          setInputFocus();
+        }}
+      >
+        <img src="/images/icons/search.png" alt="Search" />
+      </SearchIcon>
     </Search>
   );
 };
