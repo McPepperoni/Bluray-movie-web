@@ -13,7 +13,7 @@ export default function Browse() {
 
   return (
     <>
-      <BrowseContainer slides={slides}></BrowseContainer>
+      <BrowseContainer slides={slides} />
     </>
   );
 }
