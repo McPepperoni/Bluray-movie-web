@@ -7,7 +7,7 @@ export function SelectProfileContainer({ user, setProfile }) {
   //console.log("user", user.photoURL);
   return (
     <>
-      <HeaderContainer bg={false} needSignIn={false} />
+      <HeaderContainer bg={false} needSignIn={false} isFixed={true} />
       <Profiles>
         <Profiles.Title>Who&apos;s watching</Profiles.Title>
 

@@ -5,8 +5,8 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: black;
-        color: #333;
+        background-color: #141414;
+        color: #646464;
         font-size: 16px;
         min-width: 320px;
     }

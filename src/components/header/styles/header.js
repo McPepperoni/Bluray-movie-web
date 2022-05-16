@@ -2,36 +2,44 @@ import styled from "styled-components/macro";
 import { Link as ReactRouterLink } from "react-router-dom";
 
 export const Background = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(rgba(255, 255, 255, 0) 70%, rgba(0, 0, 0, 1)),
+  background: linear-gradient(rgba(255, 255, 255, 0) 60%, rgba(20, 20, 20, 1))
+      10%,
     url(${({ src }) => {
         return src ? `../images/misc/${src}.jpg` : "../images/misc/home-bg.jpg";
       }})
       top left / cover no-repeat;
+
+  background-position: center center;
 `;
 
 export const FixedContainer = styled.div`
   display: flex;
   position: fixed;
   margin: 0;
+  top: 0;
   height: 64px;
   padding: 18px 56px;
+  min-width: 290px;
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 112px);
   background: linear-gradient(rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 0));
+  z-index: 9999;
+
   a {
     display: flex;
   }
 
   @media (max-width: 1000px) {
-    margin: 0 30px;
+    padding: 0 30px;
+    width: calc(100% - 60px);
   }
 
   @media (max-width: 530px) {
-    margin: 0 calc(16px + 0.1vw);
+    padding: 0 16px;
+    width: calc(100% - 32px);
   }
 `;
 
@@ -52,7 +60,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 530px) {
-    margin: 0 calc(16px + 0.1vw);
+    margin: 0 16px;
   }
 `;
 
@@ -66,10 +74,12 @@ export const Logo = styled.img`
 
   @media (max-width: 1000px) {
     width: 108px;
+    margin-right: 20px;
   }
 
   @media (max-width: 530px) {
-    height: 24px;
+    width: 90px;
+    margin-right: 10px;
   }
 `;
 
@@ -102,25 +112,60 @@ export const Feature = styled(Container)`
   flex-direction: column;
   align-items: normal;
   width: 30%;
+
+  @media (max-width: 1100px) {
+    padding: 200px 0 240px 0;
+  }
+
+  @media (max-width: 530px) {
+    padding: 120px 0 110px 0;
+    width: 50%;
+  }
 `;
 
 export const Text = styled.p`
   color: white;
-  font-size: 1vw;
+  font-size: 18px;
   line-height: normal;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
   margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
   text-overflow: ellipsis;
+  min-width: 420px;
+
+  @media (max-width: 1100px) {
+    font-size: 14px;
+    min-width: 270px;
+  }
+
+  @media (max-width: 530px) {
+    font-size: 8px;
+    min-width: 170px;
+  }
 `;
 
 export const FeatureCallOut = styled.h2`
   color: white;
-  font-size: 3vw;
+  font-size: 50px;
   line-height: normal;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
   margin: 0;
   margin-bottom: 20px;
+  min-width: 420px;
+
+  @media (max-width: 1100px) {
+    font-size: 32px;
+    min-width: 350px;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 530px) {
+    font-size: 20px;
+    min-width: 170px;
+    margin-bottom: 5px;
+  }
 `;
 
 export const Link = styled.p`
@@ -136,6 +181,13 @@ export const Link = styled.p`
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  @media (max-width: 1100px) {
+    margin-right: 20px;
+  }
+  @media (max-width: 530px) {
+    margin-right: 10px;
   }
 `;
 
@@ -272,12 +324,14 @@ export const SearchInput = styled.input`
 export const PlayButton = styled.button`
   display: flex;
   //justify-content: center;
+  white-space: nowrap;
   align-items: center;
   box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
   background-color: #e6e6e6;
   color: #000;
   border-width: 0;
-  padding: 0.5vw 1.5vw;
+  padding: 10px 15px;
+  padding: 10px 15px;
   border-radius: 4px;
   max-width: fit-content;
   font-size: 20px;
@@ -293,46 +347,37 @@ export const PlayButton = styled.button`
     padding-right: 5px;
 
     @media (max-width: 1100px) {
-      width: 2.5vw;
+      width: 14px;
+    }
+
+    @media (max-width: 530px) {
+      width: 10px;
     }
   }
 
   @media (max-width: 1100px) {
-    font-size: 2vw;
+    font-size: 15px;
+    margin-top: 10px;
+    padding: 8px 12px;
+  }
+  @media (max-width: 530px) {
+    font-size: 8px;
+    margin-top: 5px;
+    padding: 5px 8px;
   }
 `;
 
-export const InfoButton = styled.button`
-  display: flex;
-  //justify-content: center;
-  align-items: center;
-  box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
+export const InfoButton = styled(PlayButton)`
   background-color: rgba(255, 255, 255, 0.35);
   color: #fff;
-  border-width: 0;
-  padding: 0.5vw 1.5vw;
-  border-radius: 4px;
-  max-width: fit-content;
-  font-size: 20px;
-  margin-top: 30px;
-  margin-left: 10px;
-  cursor: pointer;
+
+  margin-left: 5px;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.15);
   }
 
   img {
-    width: 25px;
-    padding: 0 5px;
     filter: brightness(0) invert();
-
-    @media (max-width: 1100px) {
-      width: 2.5vw;
-    }
-  }
-
-  @media (max-width: 1100px) {
-    font-size: 2vw;
   }
 `;

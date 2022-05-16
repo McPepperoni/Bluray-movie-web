@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { createContext, useState, useContext } from "react";
 import {
   Container,
@@ -9,27 +10,19 @@ import {
   Title,
   Entity,
   Image,
-  Feature,
-  FeatureTitle,
-  FeatureClose,
+  Button,
+  Info,
   Maturity,
   Content,
-  FeatureText,
+  MatchRate,
+  ToolTip,
+  ToolTipText,
 } from "./styles/card";
 
 export const FeatureContext = createContext();
 
 export default function Card({ children, ...restProps }) {
-  const [showFeature, setShowFeature] = useState(false);
-  const [itemFeature, setItemFeature] = useState({});
-
-  return (
-    <FeatureContext.Provider
-      value={{ showFeature, setShowFeature, itemFeature, setItemFeature }}
-    >
-      <Container {...restProps}>{children}</Container>
-    </FeatureContext.Provider>
-  );
+  return <Container {...restProps}>{children}</Container>;
 }
 
 Card.Group = function CardGroup({ children, ...restProps }) {
@@ -57,50 +50,66 @@ Card.Meta = function CardMeta({ children, ...restProps }) {
 };
 
 Card.Item = function CardItem({ item, children, ...restProps }) {
-  const { setShowFeature, setItemFeature } = useContext(FeatureContext);
-
-  return (
-    <Item
-      onClick={() => {
-        setItemFeature(item);
-        setShowFeature(true);
-      }}
-      {...restProps}
-    >
-      {children}
-    </Item>
-  );
+  return <Item {...restProps}>{children}</Item>;
 };
 
-Card.Feature = function CardFeature({ category, children, ...restProps }) {
-  const { showFeature, itemFeature, setShowFeature } =
-    useContext(FeatureContext);
-
-  return showFeature ? (
-    <Feature
-      {...restProps}
-      src={`/images/${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`}
-    >
+Card.Info = function CardInfo({ item, children, ...restProps }) {
+  //console.log(item);
+  return (
+    <Info {...restProps}>
+      {children}
       <Content>
-        <FeatureTitle>{itemFeature.title}</FeatureTitle>
-        <FeatureText>{itemFeature.description}</FeatureText>
-        <FeatureClose onClick={() => setShowFeature(false)}>
-          <img scr="/images/icons/close.png" alt="Close" />
-        </FeatureClose>
+        <Group flexDirection="row">
+          <Button isBlack={false}>
+            <img src="/images/icons/play.svg" />
+          </Button>
 
-        <Group margin="30px 0" flexDirection="row" alignItems="center">
-          <Maturity rating={itemFeature.maturity}>
-            {itemFeature.maturity < 12 ? "PG" : itemFeature.maturity}
-          </Maturity>
-          <FeatureText fontWeight="bold">
-            {itemFeature.genre.charAt(0).toUpperCase() +
-              itemFeature.genre.slice(1)}
-          </FeatureText>
+          <Button isBlack={true}>
+            <ToolTip>
+              <ToolTipText>Add to My List</ToolTipText>
+              <img src="/images/misc/rhombus.png" />
+            </ToolTip>
+            <img src="/images/icons/add.svg" />
+          </Button>
+
+          <Button isBlack={true}>
+            <img src="/images/misc/like.svg" />
+          </Button>
+          <Button isBlack={true}>
+            <ToolTip>
+              <ToolTipText>Remove from row</ToolTipText>
+              <img src="/images/misc/rhombus.png" />
+            </ToolTip>
+            <img src="/images/misc/x.svg" />
+          </Button>
         </Group>
-        {children}
+        <Group>
+          <Button isBlack={true}>
+            <ToolTip>
+              <ToolTipText>Episodes and info</ToolTipText>
+              <img src="/images/misc/rhombus.png" />
+            </ToolTip>
+            <img src="/images/misc/check.svg" />
+          </Button>
+        </Group>
       </Content>
-    </Feature>
-  ) : null;
+      <Content>
+        <Group flexDirection="row">
+          <MatchRate>98% Match</MatchRate>
+          <Maturity rating={item.maturity}>
+            {item.maturity < 12 ? "PG" : item.maturity}+
+          </Maturity>
+        </Group>
+      </Content>
+      <Content>
+        <Group flexDirection="row">
+          <Card.SubTitle>{item.genre}</Card.SubTitle>
+          &bull;
+          <Card.SubTitle>{item.genre}</Card.SubTitle>
+        </Group>
+      </Content>
+    </Info>
+  );
 };
 
 Card.Image = function CardImage({ ...restProps }) {

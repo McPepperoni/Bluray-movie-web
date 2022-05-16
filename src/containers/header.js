@@ -7,11 +7,12 @@ export function HeaderContainer({
   bg,
   children,
   needSignIn = true,
+  isFixed = false,
   ...restProps
 }) {
   return (
     <Header bg={bg} {...restProps}>
-      <Header.Frame>
+      <Header.Frame isFixed={isFixed}>
         <Header.Logo to={ROUTES.HOME} alt="Netflix" src={logo} />
         {needSignIn ? (
           <Header.ButtonLink to={ROUTES.SIGN_IN}>Sign In</Header.ButtonLink>

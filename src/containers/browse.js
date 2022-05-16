@@ -2,7 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { SelectProfileContainer } from "./profiles";
 import { FooterContainer } from "./footer";
 import { FirebaseContext } from "../context/firebase";
-import { Card, Loading, Header, Player } from "../components";
+// eslint-disable-next-line no-unused-vars
+import { Card, Loading, Header, Player, ToolTip } from "../components";
 import logo from "../logo.svg";
 import * as ROUTES from "../constants/routes";
 
@@ -26,7 +27,7 @@ export function BrowseContainer(slides) {
     setSlideRows(slides["slides"][category]);
   }, [slides, category]);
 
-  console.log("slides", slides);
+  //console.log("slides", slides);
   return profile.displayName ? (
     <>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
@@ -92,22 +93,13 @@ export function BrowseContainer(slides) {
                 <>
                   <Card.Item key={item.docId} item={item}>
                     <Card.Image
-                      src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                      src={`./images/${category}/${item.genre}/${item.slug}/small.jpg`}
                     />
-                    <Card.Meta>
-                      <Card.SubTitle>{item.title}</Card.SubTitle>
-                      <Card.Text>{item.description}</Card.Text>
-                    </Card.Meta>
+                    <Card.Info item={item}></Card.Info>
                   </Card.Item>
                 </>
               ))}
             </Card.Entity>
-            <Card.Feature category={category}>
-              <Player>
-                <Player.Button />
-                <Player.Video src="./videos/bunny.mp4" />
-              </Player>
-            </Card.Feature>
           </Card>
         ))}
       </Card.Group>
