@@ -62,6 +62,7 @@ export const Group = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
+  background-color: #141414;
   align-items: center;
   flex-direction: ${({ flexDirection }) =>
     flexDirection === "row" ? "row" : "column"};
