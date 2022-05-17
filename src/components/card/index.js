@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext } from "react";
 import {
   Container,
   Group,
   Item,
-  Meta,
   Subtitle,
   Text,
   Title,
@@ -17,6 +15,7 @@ import {
   MatchRate,
   ToolTip,
   ToolTipText,
+  LikeButtons,
 } from "./styles/card";
 
 export const FeatureContext = createContext();
@@ -45,12 +44,22 @@ Card.Entity = function CardEntity({ children, ...restProps }) {
   return <Entity {...restProps}>{children}</Entity>;
 };
 
-Card.Meta = function CardMeta({ children, ...restProps }) {
-  return <Meta {...restProps}>{children}</Meta>;
+Card.Item = function CardItem({ children, ...restProps }) {
+  return <Item {...restProps}>{children}</Item>;
 };
 
-Card.Item = function CardItem({ item, children, ...restProps }) {
-  return <Item {...restProps}>{children}</Item>;
+Card.Button = function CardButton({ src, toolTip = "", ...restProps }) {
+  return (
+    <Button {...restProps}>
+      {toolTip === "" ? null : (
+        <ToolTip>
+          <ToolTipText>{toolTip}</ToolTipText>
+          <img src="/images/misc/rhombus.png" />
+        </ToolTip>
+      )}
+      <img src={src} />
+    </Button>
+  );
 };
 
 Card.Info = function CardInfo({ item, children, ...restProps }) {
@@ -74,6 +83,17 @@ Card.Info = function CardInfo({ item, children, ...restProps }) {
 
           <Button isBlack={true}>
             <img src="/images/misc/like.svg" />
+            <LikeButtons>
+              <Button isBlack={true}>
+                <img src="/images/misc/dont-like.svg" />
+              </Button>
+              <Button isBlack={true}>
+                <img src="/images/misc/like.svg" />
+              </Button>
+              <Button isBlack={true}>
+                <img src="/images/misc/really-like.svg" />
+              </Button>
+            </LikeButtons>
           </Button>
           <Button isBlack={true}>
             <ToolTip>
@@ -114,4 +134,24 @@ Card.Info = function CardInfo({ item, children, ...restProps }) {
 
 Card.Image = function CardImage({ ...restProps }) {
   return <Image {...restProps} />;
+};
+
+Card.LikeButtons = function CardLikeButtons({ children, ...restProps }) {
+  return (
+    <Button isBlack={true} {...restProps}>
+      {children}
+      <img src="/images/misc/like.svg" />
+      <LikeButtons>
+        <Button isBlack={true}>
+          <img src="/images/misc/dont-like.svg" />
+        </Button>
+        <Button isBlack={true}>
+          <img src="/images/misc/like.svg" />
+        </Button>
+        <Button isBlack={true}>
+          <img src="/images/misc/really-like.svg" />
+        </Button>
+      </LikeButtons>
+    </Button>
+  );
 };

@@ -20,12 +20,15 @@ export const FixedContainer = styled.div`
   margin: 0;
   top: 0;
   height: 64px;
-  padding: 18px 56px;
+  padding: 0 56px;
   min-width: 290px;
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 112px);
-  background: linear-gradient(rgba(0, 0, 0, 1) 20px, rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    rgba(20, 20, 20, 1) ${({ yOffSet }) => yOffSet / 5}%,
+    rgba(255, 255, 255, 0)
+  );
   z-index: 9999;
 
   a {
@@ -330,12 +333,11 @@ export const PlayButton = styled.button`
   background-color: #e6e6e6;
   color: #000;
   border-width: 0;
-  padding: 10px 15px;
-  padding: 10px 15px;
+  padding: 7px 20px;
   border-radius: 4px;
   max-width: fit-content;
   font-size: 20px;
-  margin-top: 30px;
+  margin-top: ${({ marginTop }) => (marginTop ? `${marginTop}` : "30px")};
   cursor: pointer;
 
   &:hover {

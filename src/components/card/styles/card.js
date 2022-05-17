@@ -60,6 +60,7 @@ export const Container = styled.div`
 
 export const Group = styled.div`
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   flex-direction: ${({ flexDirection }) =>
@@ -121,7 +122,7 @@ export const ToolTip = styled.div`
   background-color: #e6e6e6;
   color: black;
 
-  bottom: 102%;
+  top: -150%;
   padding: 8px 10px;
   border-radius: 3px;
 
@@ -146,6 +147,22 @@ export const ToolTipText = styled.p`
   white-space: nowrap;
 `;
 
+export const LikeButtons = styled.div`
+  display: flex;
+  position: absolute;
+  flex-wrap: nowrap;
+  background-color: #232323;
+  transform: scaleX(0);
+  opacity: 0;
+  transition: all 0.25s;
+  z-index: 9999;
+
+  -webkit-box-shadow: 4px 10px 15px -3px #000000;
+  box-shadow: 4px 10px 15px -3px #000000;
+  padding: 10px;
+  border-radius: 100px;
+`;
+
 export const Button = styled.button`
   display: flex;
   justify-content: center;
@@ -156,15 +173,15 @@ export const Button = styled.button`
   cursor: pointer;
   border: ${({ isBlack }) => (isBlack === true ? "2px #888 solid" : "0")};
 
-  height: 1.8vw;
-  width: 1.8vw;
   margin: 0 3px;
+  height: 32px;
+  width: 32px;
 
   > img {
     filter: ${({ isBlack }) =>
       isBlack === true ? "brightness(0) invert(1)" : "none"};
     aspect-ratio: 1;
-    max-width: 100%;
+    width: 24px;
 
     margin: ${({ isBlack }) => (isBlack === true ? "1px" : "0 0 0 4px")};
 
@@ -185,6 +202,11 @@ export const Button = styled.button`
       isBlack === true ? `transparent` : "rgba(255, 255, 255, 0.85)"};
     border-radius: 50%;
 
+    ${LikeButtons} {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
     ${ToolTip} {
       display: flex;
     }
@@ -197,6 +219,9 @@ export const Button = styled.button`
   @media (max-width: 1100px) {
     padding: 1px;
     margin: 0 1px;
+
+    height: 24px;
+    width: 24px;
 
     border: ${({ isBlack }) => (isBlack === true ? "1px #888 solid" : "0")};
   }
@@ -306,11 +331,6 @@ export const Content = styled.div`
   }
 `;
 
-export const Meta = styled.div`
-  margin: 0;
-  padding: 0;
-`;
-
 export const Entity = styled.div`
   width: fit-content;
   display: flex;
@@ -360,7 +380,7 @@ export const Item = styled.div`
     }
   }
   @media (min-width: 1200px) {
-    &:hover ${Meta}, &:hover ${Text}, &:hover ${Subtitle} {
+    &:hover ${Text}, &:hover ${Subtitle} {
       display: block;
       z-index: 100;
     }

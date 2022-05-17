@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { SelectProfileContainer } from "./profiles";
 import { FooterContainer } from "./footer";
 import { FirebaseContext } from "../context/firebase";
-// eslint-disable-next-line no-unused-vars
-import { Card, Loading, Header, Player, ToolTip } from "../components";
+import { Card, Loading, Header, Info } from "../components";
+import lockBody from "../state/lockbody";
 import logo from "../logo.svg";
 import * as ROUTES from "../constants/routes";
 
@@ -13,12 +13,22 @@ export function BrowseContainer(slides) {
   const [profile, setProfile] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showInfo, setShowInfo] = useState(false);
+  const [itemShow, setItemShow] = useState({});
+  const [yOffSet, setYOffSet] = useState(0);
+
+  const infoRef = useRef(null);
+
   const { firebase } = useContext(FirebaseContext);
 
   const user = firebase.auth().currentUser || {};
+
+  const handleScroll = () => {
+    setYOffSet(window.pageYOffset);
+  };
+
   useEffect(() => {
     setTimeout(() => {
-      //console.log("profile", profile);
       setLoading(false);
     }, 3000);
   }, [profile.displayName]);
@@ -27,12 +37,15 @@ export function BrowseContainer(slides) {
     setSlideRows(slides["slides"][category]);
   }, [slides, category]);
 
-  //console.log("slides", slides);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  });
+
   return profile.displayName ? (
     <>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
       <Header src="joker1" dontShowOnSmallViewPort>
-        <Header.Frame isFixed={true}>
+        <Header.Frame isFixed={true} yOffSet={yOffSet}>
           <Header.Group>
             <Header.Logo to={ROUTES.HOME} alt="Netflix" src={logo} />
             <Header.TextLink
@@ -91,7 +104,16 @@ export function BrowseContainer(slides) {
             <Card.Entity>
               {slideItem.data.map((item) => (
                 <>
-                  <Card.Item key={item.docId} item={item}>
+                  <Card.Item
+                    key={item.docId}
+                    item={item}
+                    onClick={() => {
+                      setShowInfo((showInfo) => !showInfo);
+                      lockBody(true);
+                      item.category = category;
+                      setItemShow(item);
+                    }}
+                  >
                     <Card.Image
                       src={`./images/${category}/${item.genre}/${item.slug}/small.jpg`}
                     />
@@ -103,6 +125,77 @@ export function BrowseContainer(slides) {
           </Card>
         ))}
       </Card.Group>
+      <Info active={showInfo} ref={infoRef} yOffSet={yOffSet}>
+        <Info.Content active={showInfo}>
+          <Info.Background
+            src={`/images/${itemShow.category}/${itemShow.genre}/${itemShow.slug}/large.jpg`}
+          >
+            <Info.CloseButton
+              onClick={() => {
+                setShowInfo((showInfo) => !showInfo);
+                lockBody(false);
+              }}
+            />
+            <Info.Title>{itemShow.title}</Info.Title>
+            <Info.Group justifyContent="space-between">
+              <Info.Group flexWrap="nowrap">
+                <Header.PlayButton marginTop={"0"}>Play</Header.PlayButton>
+                <Card.Button
+                  isBlack={true}
+                  src={"/images/icons/add.svg"}
+                  toolTip={"Add to My List"}
+                />
+                <Card.LikeButtons />
+              </Info.Group>
+              <Info.Group>
+                <Card.Button
+                  isBlack={true}
+                  src={"/images/icons/mute.svg"}
+                  toolTip={""}
+                />
+              </Info.Group>
+            </Info.Group>
+          </Info.Background>
+          <Info.Group margin={"0 45px"}>
+            <Info.Column>
+              <Info.Row>
+                <Info.Meta />
+                <Info.Subtitle>{itemShow.description}</Info.Subtitle>
+              </Info.Row>
+              <Info.Row>
+                <Info.Group>
+                  <Info.DetailTitle>Cast:</Info.DetailTitle>
+                  &nbsp;
+                  <Info.DetailContent>Joaquin Phoenix,</Info.DetailContent>
+                  &nbsp;
+                  <Info.DetailContent>Robert De Niro,</Info.DetailContent>
+                  &nbsp;
+                  <Info.DetailContent>Zazie Beets,</Info.DetailContent>
+                  &nbsp;
+                  <Info.DetailContent>more,</Info.DetailContent>
+                </Info.Group>
+                <Info.Group margin="5px 0">
+                  <Info.DetailTitle>Genres:</Info.DetailTitle>
+                  &nbsp;
+                  <Info.DetailContent>Social Issue Dramas,</Info.DetailContent>
+                  &nbsp;
+                  <Info.DetailContent>US Movies,</Info.DetailContent>
+                  &nbsp;
+                  <Info.DetailContent>Crime Movies</Info.DetailContent>
+                </Info.Group>
+
+                <Info.Group margin="5px 0">
+                  <Info.DetailTitle>This movie is:</Info.DetailTitle>
+                  &nbsp;
+                  <Info.DetailContent>Violent,</Info.DetailContent>
+                  &nbsp;
+                  <Info.DetailContent>Gritty</Info.DetailContent>
+                </Info.Group>
+              </Info.Row>
+            </Info.Column>
+          </Info.Group>
+        </Info.Content>
+      </Info>
       <FooterContainer />
     </>
   ) : (
