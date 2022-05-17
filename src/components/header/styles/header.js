@@ -4,7 +4,11 @@ import { Link as ReactRouterLink } from "react-router-dom";
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  background: linear-gradient(rgba(255, 255, 255, 0) 60%, rgba(20, 20, 20, 1))
+  background: linear-gradient(
+        rgba(255, 255, 255, 0) 60%,
+        ${({ isBlack }) =>
+          isBlack ? "rgba(0, 0, 0, 1)" : "rgba(20, 20, 20, 1)"}
+      )
       10%,
     url(${({ src }) => {
         return src ? `../images/misc/${src}.jpg` : "../images/misc/home-bg.jpg";

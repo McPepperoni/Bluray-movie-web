@@ -11,7 +11,7 @@ export function HeaderContainer({
   ...restProps
 }) {
   return (
-    <Header bg={bg} {...restProps}>
+    <Header bg={bg} {...restProps} isBlack={true}>
       <Header.Frame isFixed={isFixed}>
         <Header.Logo to={ROUTES.HOME} alt="Netflix" src={logo} />
         {needSignIn ? (
