@@ -104,21 +104,40 @@ export function BrowseContainer(slides) {
             <Card.Entity>
               {slideItem.data.map((item) => (
                 <>
-                  <Card.Item
-                    key={item.docId}
-                    item={item}
-                    onClick={() => {
-                      setShowInfo((showInfo) => !showInfo);
-                      lockBody(true);
-                      item.category = category;
-                      setItemShow(item);
-                    }}
-                  >
-                    <Card.Image
-                      src={`./images/${category}/${item.genre}/${item.slug}/small.jpg`}
-                    />
-                    <Card.Info item={item}></Card.Info>
-                  </Card.Item>
+                  <Card.ItemContainer>
+                    <Card.Item
+                      key={item.docId}
+                      item={item}
+                      onClick={() => {
+                        setShowInfo((showInfo) => !showInfo);
+                        lockBody(true);
+                        item.category = category;
+                        setItemShow(item);
+                      }}
+                    >
+                      <Card.Image
+                        src={`./images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                      />
+                      <Card.Info item={item}></Card.Info>
+                    </Card.Item>
+                  </Card.ItemContainer>
+                  <Card.ItemContainer>
+                    <Card.Item
+                      key={item.docId}
+                      item={item}
+                      onClick={() => {
+                        setShowInfo((showInfo) => !showInfo);
+                        lockBody(true);
+                        item.category = category;
+                        setItemShow(item);
+                      }}
+                    >
+                      <Card.Image
+                        src={`./images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                      />
+                      <Card.Info item={item}></Card.Info>
+                    </Card.Item>
+                  </Card.ItemContainer>
                 </>
               ))}
             </Card.Entity>

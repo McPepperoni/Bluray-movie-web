@@ -5,6 +5,7 @@ export const Title = styled.p`
   color: #e5e5e5;
   font-weight: bold;
   margin-left: 56px;
+  width: calc(100% - 2 * 56px);
   margin-right: 56px;
   margin-top: 0;
 
@@ -42,8 +43,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
-  width: 100%;
+  width: fit-content;
   box-sizing: border-box;
+  align-items: center;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -153,7 +155,7 @@ export const LikeButtons = styled.div`
   position: absolute;
   flex-wrap: nowrap;
   background-color: #232323;
-  transform: scaleX(0);
+  /* transform: scaleX(0); */
   opacity: 0;
   transition: all 0.25s;
   z-index: 9999;
@@ -204,7 +206,7 @@ export const Button = styled.button`
     border-radius: 50%;
 
     ${LikeButtons} {
-      transform: scaleX(1);
+      /* transform: scaleX(1); */
       opacity: 1;
     }
 
@@ -225,6 +227,18 @@ export const Button = styled.button`
     width: 24px;
 
     border: ${({ isBlack }) => (isBlack === true ? "1px #888 solid" : "0")};
+  }
+`;
+
+export const ItemContainer = styled.div`
+  flex: 0 0 20%;
+  position: relative;
+  padding: 0.2rem;
+  max-width: 20%;
+  /* z-index: 0; */
+
+  &:first-of-type {
+    padding-left: 0;
   }
 `;
 
@@ -333,10 +347,13 @@ export const Content = styled.div`
 `;
 
 export const Entity = styled.div`
-  width: fit-content;
   display: flex;
   justify-content: flex-start;
-  margin: 0 56px;
+  width: calc(100% - 2 * 56px - 25px);
+
+  transform: translateX(-100%);
+  transform-style: flat;
+
   @media (max-width: 1100px) {
     margin: 0 30px;
   }
@@ -349,7 +366,6 @@ export const Entity = styled.div`
 export const Image = styled.img`
   border-radius: 3px;
   width: 100%;
-  max-width: 305px;
   cursor: pointer;
   height: auto;
   padding: 0;
@@ -359,16 +375,17 @@ export const Image = styled.img`
 export const Item = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 5px;
   position: relative;
   cursor: pointer;
   border-radius: 0.3vw;
+  width: 100%;
+  /* z-index: 0; */
 
   transition: transform 0.2s;
 
   &:hover {
-    transform: scale(1.36);
-    z-index: 999;
+    transform: scale(1.3) translateY(-20%);
+    z-index: 9999;
     -webkit-box-shadow: 4px 10px 15px -3px #000000;
     box-shadow: 4px 10px 15px -3px #000000;
 
@@ -383,7 +400,6 @@ export const Item = styled.div`
   @media (min-width: 1200px) {
     &:hover ${Text}, &:hover ${Subtitle} {
       display: block;
-      z-index: 100;
     }
   }
 `;

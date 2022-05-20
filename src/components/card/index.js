@@ -16,6 +16,7 @@ import {
   ToolTip,
   ToolTipText,
   LikeButtons,
+  ItemContainer,
 } from "./styles/card";
 
 export const FeatureContext = createContext();
@@ -46,6 +47,10 @@ Card.Entity = function CardEntity({ children, ...restProps }) {
 
 Card.Item = function CardItem({ children, ...restProps }) {
   return <Item {...restProps}>{children}</Item>;
+};
+
+Card.ItemContainer = function CardItemContainer({ children, ...restProps }) {
+  return <ItemContainer {...restProps}>{children}</ItemContainer>;
 };
 
 Card.Button = function CardButton({ src, toolTip = "", ...restProps }) {

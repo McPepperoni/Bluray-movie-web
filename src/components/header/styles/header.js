@@ -29,6 +29,7 @@ export const FixedContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 112px);
+  transform: translateZ(1000%);
   background: linear-gradient(
     rgba(20, 20, 20, 1) ${({ yOffSet }) => yOffSet / 5}%,
     rgba(255, 255, 255, 0)
