@@ -117,7 +117,7 @@ export function BrowseContainer(slides) {
                     <Card.Image
                       src={`./images/${category}/${item.genre}/${item.slug}/small.jpg`}
                     />
-                    <Card.Info item={item}></Card.Info>
+                    <Card.Info item={item} />
                   </Card.Item>
                 </>
               ))}

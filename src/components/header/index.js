@@ -1,6 +1,6 @@
 import React from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import useFocus from "../../hooks/use-focus";
+import { useFocus } from "../../hooks";
 import {
   Background,
   ButtonLink,

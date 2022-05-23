@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Group,
@@ -63,13 +64,14 @@ Card.Button = function CardButton({ src, toolTip = "", ...restProps }) {
 };
 
 Card.Info = function CardInfo({ item, children, ...restProps }) {
+  const navigate = useNavigate();
   //console.log(item);
   return (
     <Info {...restProps}>
       {children}
       <Content>
         <Group flexDirection="row">
-          <Button isBlack={false}>
+          <Button isBlack={false} onClick={() => navigate(`/watch/${item.id}`)}>
             <img src="/images/icons/play.svg" />
           </Button>
 
