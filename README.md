@@ -17,6 +17,7 @@ ___
 - Sign In
 - Sign Up
 - Browse
+- Watch page
 
 ***ALow Sign in/Sign up** with email by using **firebase**.*
 
@@ -26,6 +27,8 @@ ___
 
 ## **What is still in progress ?**
 
-- **Watch page**.
+- ~~**Watch page**.~~
 - **Backend** to request and stream video.
 - **Responsive** issues.
+- **Watch page button functions**
+- **Browse page functions**
